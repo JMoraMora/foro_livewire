@@ -21,11 +21,13 @@ class ShowThread extends Component
             'body' => $this->body,
         ]);
 
-        $this->body = '';
+        $this->reset('body'); 
     }
 
     public function render()
     {
-        return view('livewire.show-thread');
+        return view('livewire.show-thread', [
+            'replies' => $this->thread->replies()->get()
+        ]);
     }
 }

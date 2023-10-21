@@ -24,9 +24,10 @@
         </div>
     </div>
 
-    <!-- replies -->
+    @foreach ($replies as $reply)
+        @livewire('show-reply', ['reply' => $reply], key('reply-'.$reply->id))
+    @endforeach
 
-    <!-- form -->
     <form wire:submit="postReply" class="mb-4">
         <input 
             type="text" 
