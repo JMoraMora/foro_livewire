@@ -6,7 +6,7 @@
 
         <ul>
             @foreach ($categories as $category)
-                <li class="mb-2">
+                <li class="mb-2" wire:key="{{ $category->id }}">
                     <a href="#" wire:click.prevent="filterByCategory({{ $category->id }})" class="p-2 rounded-md flex bg-slate-800 items-center gap-2 text-white/60 hover:text-white font-semibold text-xs capitalize">
                         <span class="w-2 h-2 rounded-full" style="background-color: {{ $category->color }};"></span>
                         {{ $category->name }}
@@ -32,7 +32,7 @@
         </form>
 
         @foreach ($threads as $thread)
-            <div class="rounded-md bg-gradient-to-r from-slate-800 to-slate-900 hover:to-slate-800 mb-4">
+            <div class="rounded-md bg-gradient-to-r from-slate-800 to-slate-900 hover:to-slate-800 mb-4" wire:key="{{ $thread->id }}">
                 <div class="p-4 flex gap-4">
                     <div>
                         <img src="{{ $thread->user->avatar() }}" alt="{{ $thread->user->name }}" class="rounded-md">
