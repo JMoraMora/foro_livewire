@@ -22,7 +22,7 @@
 
     @foreach ($reply->replies as $item)
         <div class="ml-8">
-            @livewire('show-reply', ['reply' => $item], key('reply-'.$item->id))
+            <livewire:show-reply :reply="$item" wire:key="{{ $item->id }}"/>
         </div>
     @endforeach
 </div>

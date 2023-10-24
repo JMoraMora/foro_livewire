@@ -25,7 +25,7 @@
     </div>
 
     @foreach ($replies as $reply)
-        <livewire:show-reply :reply=$reply  wire:key="{{ $reply->id }}"/>
+        <livewire:show-reply :reply="$reply"  wire:key="{{ $reply->id }}"/>
     @endforeach
 
     <form wire:submit="postReply" class="mb-4">
