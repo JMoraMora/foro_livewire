@@ -34,6 +34,8 @@ class ShowReply extends Component
 
     public function updated($property)
     {
+        $this->authorize('update', $this->reply);
+        
         if($property === 'is_editing') {
             $this->is_creating = false;
             $this->body = $this->reply->body;
@@ -47,6 +49,7 @@ class ShowReply extends Component
 
     public function updateReply()
     {
+        $this->authorize('update', $this->reply);
         // validate
         $this->validate(['body' => 'required']);
 
