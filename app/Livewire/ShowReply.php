@@ -11,6 +11,7 @@ class ShowReply extends Component
 
     public $body = '';
     public $is_creating = false;
+    public $is_editing = false;
 
     public function postChild()
     {
@@ -29,6 +30,33 @@ class ShowReply extends Component
 
         $this->body = ''; 
         $this->is_creating = false; 
+    }
+
+    public function updated($property)
+    {
+        if($property === 'is_editing') {
+            $this->is_creating = false;
+            $this->body = $this->reply->body;
+        }
+
+        if($property === 'is_creating') {
+            $this->is_editing = false;
+            $this->body = '';
+        }
+    }
+
+    public function updateReply()
+    {
+        // validate
+        $this->validate(['body' => 'required']);
+
+        // update
+        $this->reply->update([
+            'body' => $this->body,
+        ]);
+
+        $this->body = ''; 
+        $this->is_editing = false; 
     }
 
     public function render()
