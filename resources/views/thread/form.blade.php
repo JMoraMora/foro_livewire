@@ -3,7 +3,7 @@
         <option value="">Seleccionar categoria</option>
 
         @foreach($categories as $category)
-            <option value="{{ $category->id }}" @selected($category->id == old('category_id', $thread->category_id))>
+            <option value="{{ $category->id }}" @isset($thread) @selected($category->id == old('category_id', $thread->category_id)) @endisset>
                 {{ $category->name }}
             </option>
         @endforeach
@@ -12,7 +12,11 @@
     <input type="text" 
         name="title"
         placeholder="Titulo"
-        value="{{ old('title', $thread->title) }}"
+        @if(!empty($thread))
+            value="{{ old('title', $thread->title) }}"    
+        @else
+            value="{{ old('title') }}"    
+        @endif
         class="bg-slate-800 border-1 border-slate-900 rounded-md w-full p-3 text-white/60 text-xs mb-4"    
     >
 
@@ -20,5 +24,5 @@
         name="body" 
         rows="6" 
         placeholder="Descripcion del problema"
-        class="bg-slate-800 border-1 border-slate-900 rounded-md w-full p-3 text-white/60 text-xs mb-4">{{ old('body', $thread->body) }}</textarea>
+        class="bg-slate-800 border-1 border-slate-900 rounded-md w-full p-3 text-white/60 text-xs mb-4">@if(!empty($thread)){{ old('body', $thread->body) }}@else{{ old('body') }}@endif</textarea>
 </div>
