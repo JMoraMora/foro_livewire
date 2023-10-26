@@ -53,7 +53,10 @@
                             </span>
                             <span class="text-slate-700">
                                 {{ $thread->replies_count }} Reply
-                                <a href="{{ route('threads.edit', $thread) }}" class="hover:text-white">Editar</a>
+
+                                @can('update', $thread)
+                                    <a href="{{ route('threads.edit', $thread) }}" class="hover:text-white">Editar</a>
+                                @endcan
                             </span>
                         </p>
                     </div>
